@@ -76,8 +76,25 @@ const connectDB = async () => {
 
 // Middleware to ensure DB connection
 app.use(async (req, res, next) => {
-    await connectDB();
-    next();
+    try {
+        if (!process.env.MONGODB_URI) {
+            console.error('❌ MONGODB_URI is missing in environment variables');
+            return res.status(500).json({ success: false, error: 'Database configuration missing' });
+        }
+
+        if (mongoose.connection.readyState !== 1) {
+            console.log('🔄 Connecting to MongoDB Atlas...');
+            await mongoose.connect(process.env.MONGODB_URI, {
+                serverSelectionTimeoutMS: 15000,
+                connectTimeoutMS: 15000,
+            });
+            console.log('✅ Connected to MongoDB');
+        }
+        next();
+    } catch (error) {
+        console.error('❌ Database Connection Error:', error.message);
+        res.status(500).json({ success: false, error: 'Database connection failed' });
+    }
 });
 
 // ========== ROUTES ==========
