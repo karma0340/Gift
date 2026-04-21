@@ -246,6 +246,7 @@ router.post('/', async (req, res, next) => {
 router.post('/:orderId/confirm', async (req, res, next) => {
     try {
         const { orderId } = req.params;
+        const { transactionHash } = req.body;
         const order = await Order.findOne({ orderId });
 
         if (!order) {
@@ -255,6 +256,9 @@ router.post('/:orderId/confirm', async (req, res, next) => {
         if (order.status === 'pending') {
             order.status = 'payment_received';
             order.paidAt = new Date();
+            if (transactionHash) {
+                order.crypto.transactionHash = transactionHash;
+            }
             await order.save();
         }
 

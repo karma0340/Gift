@@ -223,6 +223,7 @@ const AdminDashboard = () => {
                                             <th>Customer</th>
                                             <th>Gift Card</th>
                                             <th>Crypto Paid</th>
+                                            <th>TXID (Hash)</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -240,6 +241,27 @@ const AdminDashboard = () => {
                                                     <td>{order.email}</td>
                                                     <td>{order.brand.name} <strong>${order.amount}</strong></td>
                                                     <td className="mono">{order.crypto.amount} {order.crypto.currency.toUpperCase()}</td>
+                                                    <td className="mono">
+                                                        {order.crypto?.transactionHash ? (
+                                                            <a 
+                                                                href={
+                                                                    order.crypto.currency.toLowerCase().includes('btc') ? `https://www.blockchain.com/btc/tx/${order.crypto.transactionHash}` :
+                                                                    order.crypto.currency.toLowerCase().includes('eth') ? `https://etherscan.io/tx/${order.crypto.transactionHash}` :
+                                                                    order.crypto.currency.toLowerCase().includes('usdt') ? `https://tronscan.org/#/transaction/${order.crypto.transactionHash}` :
+                                                                    order.crypto.currency.toLowerCase().includes('sol') ? `https://solscan.io/tx/${order.crypto.transactionHash}` :
+                                                                    `https://www.blockchain.com/search?search=${order.crypto.transactionHash}`
+                                                                }
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                className="tx-link"
+                                                                title="View on Explorer"
+                                                            >
+                                                                {order.crypto.transactionHash.substring(0, 6)}...{order.crypto.transactionHash.substring(order.crypto.transactionHash.length - 4)}
+                                                            </a>
+                                                        ) : (
+                                                            <span className="text-muted" style={{ fontSize: '0.75rem' }}>No Hash</span>
+                                                        )}
+                                                    </td>
                                                     <td>
                                                         <span className={`status-badge status-${order.status}`}>
                                                             {order.status.replace('_', ' ')}
@@ -281,11 +303,11 @@ const AdminDashboard = () => {
                                 <div className="fiat-settlement-card">
                                     <div className="settlement-card-header">
                                         <span className="settlement-card-icon">💳</span>
-                                        <h3 className="settlement-card-title">Credit Card Settlement Wallet</h3>
-                                        <span className="moonpay-badge">MoonPay</span>
+                                        <h3 className="settlement-card-title">Cards & UPI Settlement Wallet</h3>
+                                        <span className="moonpay-badge" style={{ background: 'var(--accent-blue)' }}>Onramper</span>
                                     </div>
                                     <p className="settlement-card-description">
-                                        When customers pay with a credit/debit card via MoonPay, MoonPay will send the crypto to <strong>this</strong> wallet address regardless of what crypto the customer selected on the site.
+                                        When customers pay with a credit card or <strong>UPI (INR)</strong> via Onramper, the crypto is automatically sent to <strong>this</strong> wallet address.
                                     </p>
                                     <select
                                         className="settlement-card-select"

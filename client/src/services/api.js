@@ -45,13 +45,14 @@ const api = {
     /**
      * Confirm physical payment dispatch manually
      */
-    async confirmPayment(orderId) {
+    async confirmPayment(orderId, transactionHash = null) {
         const res = await fetch(`${API_BASE}/orders/${orderId}/confirm`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ transactionHash }),
         });
-        if (!res.ok) throw new Error('Failed to confirm payment');
         const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to confirm payment');
         return data.data;
     },
 

@@ -12,14 +12,12 @@ export default function CheckoutPage() {
     const [step, setStep] = useState('email');
     const [email, setEmail] = useState('');
     const [copied, setCopied] = useState(false);
-    const [giftCode, setGiftCode] = useState('');
-    const [walletAddress, setWalletAddress] = useState('');
-    const [cryptoPayAmount, setCryptoPayAmount] = useState('');
     const [orderId, setOrderId] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [countdown, setCountdown] = useState(600);
-    const [fiatSettlement, setFiatSettlement] = useState({ moonpayCode: 'usdt_trx', address: '' });
+    const [transactionHash, setTransactionHash] = useState('');
+    const [showOnramper, setShowOnramper] = useState(false);
     const pollRef = useRef(null);
 
     useEffect(() => {
@@ -81,7 +79,7 @@ export default function CheckoutPage() {
         setCountdown(600);
 
         try {
-            await api.confirmPayment(orderId);
+            await api.confirmPayment(orderId, transactionHash);
         } catch (err) {
             console.error('Failed to confirm payment with backend:', err);
         }
@@ -304,6 +302,20 @@ export default function CheckoutPage() {
                                 ✅ Order {orderId} — Delivering to {email}
                             </p>
 
+                            <div className="checkout__manual-verification">
+                                <label className="detail__label" style={{ marginTop: '20px' }}>
+                                    Past your Transaction ID (Hash) below:
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter TXID / Hash here..."
+                                    value={transactionHash}
+                                    onChange={e => setTransactionHash(e.target.value)}
+                                    className="detail__input"
+                                    style={{ marginBottom: '15px' }}
+                                />
+                            </div>
+
                             <button
                                 className="btn btn-primary btn-lg checkout__confirm-btn"
                                 onClick={handleConfirmPayment}
@@ -313,25 +325,36 @@ export default function CheckoutPage() {
                                 I've Sent the Payment
                             </button>
 
-                            <div className="checkout__fiat-onramp" style={{ textAlign: 'center', marginTop: '10px' }}>
-                                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                                    Don't have crypto? Pay with Credit/Debit card
+                            <div className="checkout__onramper-section" style={{ textAlign: 'center', marginTop: '10px' }}>
+                                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                                    Need crypto? Use UPI, Cards, or Google Pay instantly
                                 </p>
-                                {(() => {
-                                    return (
-                                        <a
-                                            href={`https://buy.moonpay.com?currencyCode=${fiatSettlement.moonpayCode}&walletAddress=${fiatSettlement.address || walletAddress}&baseCurrencyAmount=${amount}&baseCurrencyCode=usd`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="btn btn-secondary"
-                                            style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                                        >
-                                            💳 Pay via MoonPay
-                                        </a>
-                                    );
-                                })()}
+                                <button
+                                    onClick={() => setShowOnramper(true)}
+                                    className="btn btn-secondary"
+                                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                                >
+                                    🏦 Pay via Cards / UPI
+                                </button>
+                                
+                                {showOnramper && (
+                                    <div className="onramper-overlay" onClick={() => setShowOnramper(false)}>
+                                        <div className="onramper-modal" onClick={e => e.stopPropagation()}>
+                                            <button className="onramper-close" onClick={() => setShowOnramper(false)}>×</button>
+                                            <iframe
+                                                src={`https://buy.onramper.com/?themeName=dark&apiKey=pk_prod_01HB9ZXY6HBNVJ1D59ZXY6HBNV&defaultFiat=inr&defaultCrypto=usdt_trc20&walletAddress=${walletAddress}&fiatAmount=${amount}`}
+                                                title="Onramper Payment"
+                                                height="630px"
+                                                width="100%"
+                                                style={{ borderRadius: '12px', border: 'none' }}
+                                                allow="accelerometer; autoplay; camera; gyroscope; payment; microphone"
+                                            ></iframe>
+                                        </div>
+                                    </div>
+                                )}
+
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
-                                    If you use MoonPay, your card will be charged and the crypto will be automatically sent to the address above. Once Sent, click "I've Sent the Payment" above.
+                                    Onramper supports <strong>INR (UPI)</strong>, USD, and more. No stressful ID verification for small amounts via Mercuryo/Transak.
                                 </p>
                             </div>
                         </div>

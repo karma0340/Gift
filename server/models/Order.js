@@ -40,6 +40,7 @@ const orderSchema = new mongoose.Schema({
         amount: { type: String, required: true },     // Crypto amount to pay
         paymentAddress: { type: String },             // Wallet address from NOWPayments
         paymentId: { type: String },                  // NOWPayments payment ID
+        transactionHash: { type: String, default: null }, // Customer provided TXID
     },
 
     // Customer details
