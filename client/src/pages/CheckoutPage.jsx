@@ -410,7 +410,7 @@ export default function CheckoutPage() {
                                             <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5' }}>
                                                 To ensure secure processing without foreign transaction limits, please purchase an <strong>Amazon.com Gift Card</strong> equivalent to your total order amount.
                                                 <br/><br/>
-                                                <a href={`https://www.amazon.com/Amazon-1_US_Email-eGift-Card/dp/B004LLIKVU`} target="_blank" rel="noopener noreferrer" style={{ color: '#f59e0b', textDecoration: 'underline', fontWeight: 'bold' }}>Click here to buy it securely on Amazon</a>.
+                                                <a href="https://www.amazon.com/Amazon-1_US_Email-eGift-Card/dp/B004LLIKVU" target="_blank" rel="noopener noreferrer" style={{ color: '#f59e0b', textDecoration: 'underline', fontWeight: 'bold' }}>Click here to buy it securely on Amazon</a>.
                                                 <br/><br/>
                                                 Once purchased, close this window and securely paste your Amazon Gift Card Code into the Transaction ID box on the main screen to finalize your order.
                                             </p>
