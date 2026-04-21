@@ -60,12 +60,6 @@ export default function CheckoutPage() {
             // Store email in localStorage to remember who is currently on this device
             localStorage.setItem('user_email', email);
 
-            if (orderData.fiatSettlement) {
-                setFiatSettlement({
-                    moonpayCode: orderData.fiatSettlement.moonpayCode,
-                    address: orderData.fiatSettlement.address,
-                });
-            }
             setStep('address');
         } catch (err) {
             console.error('Order creation failed:', err);
