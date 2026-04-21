@@ -397,6 +397,13 @@ export default function CheckoutPage() {
                                             </p>
                                         </div>
 
+                                        <div className="card-instructions-box" style={{ marginTop: '15px', background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%)', borderColor: 'rgba(245, 158, 11, 0.2)' }}>
+                                            <p style={{ fontSize: '0.85rem', color: '#f59e0b', marginBottom: '8px', fontWeight: 600 }}>Global Credit Cards (Anonymous Loophole):</p>
+                                            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5' }}>
+                                                To pay completely anonymously with an International Visa or Mastercard, purchase an <strong>Amazon.com Gift Card</strong> equivalent to your total from Amazon. Click "I Have Paid" below and paste the Gift Card Code into the Transaction ID verification box!
+                                            </p>
+                                        </div>
+
                                         <button 
                                             className="btn btn-primary btn-lg" 
                                             style={{ width: '100%', marginTop: '30px' }}
