@@ -504,11 +504,12 @@
     background: #fff;
     padding: 16px;
     border-radius: 20px;
-    display: inline-block;
-    width: 100%;
-    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 20px auto;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    text-align: center;
 }
 
 .qr-image {
