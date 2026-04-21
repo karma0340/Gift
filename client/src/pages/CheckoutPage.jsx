@@ -321,7 +321,7 @@ export default function CheckoutPage() {
                             >
                                 I've Sent the Payment
                             </button>
-
+                            <div className="checkout__payment-actions" style={{ textAlign: 'center', marginTop: '10px' }}>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
                                     Need crypto? Buy with Credit/Debit card
                                 </p>
@@ -335,7 +335,7 @@ export default function CheckoutPage() {
                                     💳 Pay via MoonPay
                                 </a>
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
-                                    MoonPay is the only provider that allows you to accept cards without creating a developer account. However, they may require your customers to verify their identity (KYC).
+                                    MoonPay is the only provider that allows card payments without a developer account. They may require your customers to verify their identity (KYC).
                                 </p>
                             </div>
                         </div>
