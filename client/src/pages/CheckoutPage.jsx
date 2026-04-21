@@ -326,29 +326,15 @@ export default function CheckoutPage() {
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
                                     Need crypto? Use UPI, Cards, or Google Pay instantly
                                 </p>
-                                <button
-                                    onClick={() => setShowOnramper(true)}
+                                <a
+                                    href={`https://buy.onramper.com/?themeName=dark&apiKey=pk_prod_01HB9ZXY6HBNVJ1D59ZXY6HBNV&defaultFiat=inr&defaultCrypto=usdt&walletAddress=${walletAddress}&fiatAmount=${amount}`}
+                                    target="_blank"
+                                    rel="noreferrer"
                                     className="btn btn-secondary"
                                     style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                                 >
                                     🏦 Pay via Cards / UPI
-                                </button>
-                                
-                                {showOnramper && (
-                                    <div className="onramper-overlay" onClick={() => setShowOnramper(false)}>
-                                        <div className="onramper-modal" onClick={e => e.stopPropagation()}>
-                                            <button className="onramper-close" onClick={() => setShowOnramper(false)}>×</button>
-                                            <iframe
-                                                src={`https://buy.onramper.com/?themeName=dark&apiKey=pk_prod_01HB9ZXY6HBNVJ1D59ZXY6HBNV&defaultFiat=inr&defaultCrypto=usdt_trc20&walletAddress=${walletAddress}&fiatAmount=${amount}`}
-                                                title="Onramper Payment"
-                                                height="630px"
-                                                width="100%"
-                                                style={{ borderRadius: '12px', border: 'none' }}
-                                                allow="accelerometer; autoplay; camera; gyroscope; payment; microphone"
-                                            ></iframe>
-                                        </div>
-                                    </div>
-                                )}
+                                </a>
 
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
                                     Onramper supports <strong>INR (UPI)</strong>, USD, and more. No stressful ID verification for small amounts via Mercuryo/Transak.
