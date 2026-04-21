@@ -44,10 +44,9 @@ export default function Footer() {
 
                     <div className="footer__links-group">
                         <h4 className="footer__links-title">Company</h4>
-                        <span className="footer__link">About Us</span>
-                        <span className="footer__link">Privacy Policy</span>
-                        <span className="footer__link">Terms of Service</span>
-                        <span className="footer__link">Contact</span>
+                        <Link to="/privacy" className="footer__link">Privacy Policy</Link>
+                        <Link to="/terms" className="footer__link">Terms of Service</Link>
+                        <a href="mailto:support@globalgift.app" className="footer__link">Support</a>
                     </div>
                 </div>
 

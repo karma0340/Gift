@@ -8,6 +8,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import OrdersPage from './pages/OrdersPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   return (
@@ -23,6 +25,10 @@ function App() {
         {/* Admin Routes without Navbar/Footer */}
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
+
+        {/* Legal Routes */}
+        <Route path="/privacy" element={<><Navbar /><PrivacyPolicy /><Footer /></>} />
+        <Route path="/terms" element={<><Navbar /><TermsOfService /><Footer /></>} />
       </Routes>
     </Router>
   );
