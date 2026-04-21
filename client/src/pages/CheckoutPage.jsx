@@ -391,10 +391,47 @@ export default function CheckoutPage() {
                                         </div>
 
                                         <div className="card-instructions-box">
-                                            <p style={{ fontSize: '0.85rem', color: '#60a5fa', marginBottom: '8px', fontWeight: 600 }}>Card Users:</p>
-                                            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5' }}>
-                                                {publicSettings.cardInstructions || 'For international card payments, please use a P2P service like Paxful or Noones to send USDT to our wallet address.'}
+                                            <p style={{ fontSize: '0.85rem', color: '#60a5fa', marginBottom: '8px', fontWeight: 600 }}>Card Users (International):</p>
+                                            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5', marginBottom: '15px' }}>
+                                                {publicSettings.cardInstructions || 'You can use your credit card to buy crypto directly to our wallet. Just set the destination address to the one below.'}
                                             </p>
+                                            
+                                            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px', borderRadius: '8px', marginBottom: '15px' }}>
+                                                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '4px' }}>Destination Wallet ({crypto?.symbol || 'Crypto'}):</p>
+                                                <code style={{ fontSize: '0.85rem', color: '#fff', wordBreak: 'break-all' }}>{walletAddress || 'Select crypto first'}</code>
+                                                {walletAddress && (
+                                                    <button
+                                                        onClick={() => {
+                                                            navigator.clipboard.writeText(walletAddress);
+                                                            alert('Wallet Address Copied!');
+                                                        }}
+                                                        style={{ background: 'none', border: 'none', color: 'var(--accent-green)', marginLeft: '10px', cursor: 'pointer' }}
+                                                    >
+                                                        <HiOutlineClipboardCopy size={16} />
+                                                    </button>
+                                                )}
+                                            </div>
+
+                                            <div style={{ display: 'flex', gap: '10px' }}>
+                                                <a 
+                                                    href={`https://buy.moonpay.com/?currencyCode=${(crypto?.symbol || 'usdt').toLowerCase()}&walletAddress=${walletAddress || ''}`} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className="btn" 
+                                                    style={{ flex: 1, background: '#7d00ff', color: '#fff', fontSize: '0.85rem', padding: '10px', textAlign: 'center', borderRadius: '10px', border: 'none' }}
+                                                >
+                                                    Pay via MoonPay
+                                                </a>
+                                                <a 
+                                                    href={`https://global.transak.com/?cryptoCurrencyCode=${(crypto?.symbol || 'USDT').toUpperCase()}&walletAddress=${walletAddress || ''}`} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className="btn" 
+                                                    style={{ flex: 1, background: '#005fe3', color: '#fff', fontSize: '0.85rem', padding: '10px', textAlign: 'center', borderRadius: '10px', border: 'none' }}
+                                                >
+                                                    Pay via Transak
+                                                </a>
+                                            </div>
                                         </div>
 
                                         <button 
