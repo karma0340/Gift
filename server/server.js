@@ -36,7 +36,7 @@ app.use('/api', globalLimiter);
 // 4. Secure CORS configuration
 const corsOptions = {
     origin: process.env.NODE_ENV === 'production' 
-        ? [process.env.FRONTEND_URL, 'https://cryptogift-murex.vercel.app'] 
+        ? [process.env.FRONTEND_URL] 
         : true, // Allow all in dev for easier testing
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,

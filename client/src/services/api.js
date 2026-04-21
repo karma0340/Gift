@@ -1,8 +1,6 @@
 const API_BASE = window.location.hostname === 'localhost'
     ? 'http://localhost:5000/api'
-    : window.location.origin.includes('cryptogift-jj7h')
-        ? '/api'
-        : 'https://cryptogift-jj7h.vercel.app/api';
+    : '/api';
 
 const api = {
     /**
