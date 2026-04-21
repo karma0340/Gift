@@ -21,6 +21,8 @@ export default function CheckoutPage() {
     const [countdown, setCountdown] = useState(600);
     const [transactionHash, setTransactionHash] = useState('');
     const [showOnramper, setShowOnramper] = useState(false);
+    const [publicSettings, setPublicSettings] = useState({ upiId: '', upiQrImageUrl: '', cardInstructions: '' });
+    const [showUpiModal, setShowUpiModal] = useState(false);
     const pollRef = useRef(null);
 
     useEffect(() => {
@@ -28,10 +30,20 @@ export default function CheckoutPage() {
     }, [state, navigate]);
 
     useEffect(() => {
+        fetchPublicSettings();
         return () => {
             if (pollRef.current) clearInterval(pollRef.current);
         };
     }, []);
+
+    const fetchPublicSettings = async () => {
+        try {
+            const data = await api.getPublicSettings();
+            setPublicSettings(data);
+        } catch (err) {
+            console.error('Failed to fetch public settings:', err);
+        }
+    };
 
     if (!state) return null;
 
@@ -323,21 +335,78 @@ export default function CheckoutPage() {
                             </button>
                             <div className="checkout__payment-actions" style={{ textAlign: 'center', marginTop: '10px' }}>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                                    Need crypto? Buy with Credit/Debit card
+                                    Need crypto? Use UPI or Cards (Direct Transfer)
                                 </p>
-                                <a
-                                    href={`https://buy.moonpay.com?currencyCode=usdt_trx&walletAddress=${walletAddress}&baseCurrencyAmount=${amount}&baseCurrencyCode=usd`}
-                                    target="_blank"
-                                    rel="noreferrer"
+                                <button
+                                    onClick={() => setShowUpiModal(true)}
                                     className="btn btn-secondary"
                                     style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                                 >
-                                    💳 Pay via MoonPay
-                                </a>
+                                    🏦 Pay via UPI / Card (Direct)
+                                </button>
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
-                                    MoonPay is the only provider that allows card payments without a developer account. They may require your customers to verify their identity (KYC).
+                                    Pay directly to our UPI ID or follow card instructions. 100% anonymous, no KYC required.
                                 </p>
                             </div>
+
+                            {/* UPI / Card Direct Modal */}
+                            {showUpiModal && (
+                                <div className="direct-payment-overlay" onClick={() => setShowUpiModal(false)}>
+                                    <div className="direct-payment-card" onClick={e => e.stopPropagation()}>
+                                        <button className="direct-payment-close" onClick={() => setShowUpiModal(false)}>&times;</button>
+                                        
+                                        <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Direct Payment</h2>
+                                        <p style={{ textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '25px' }}>Scan QR or use UPI ID below</p>
+
+                                        {publicSettings.upiQrImageUrl || publicSettings.upiId ? (
+                                             <div className="qr-container">
+                                                 <img 
+                                                     src={publicSettings.upiQrImageUrl || `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=${publicSettings.upiId}&pn=GlobalGift`} 
+                                                     alt="UPI QR Code" 
+                                                     className="qr-image"
+                                                 />
+                                             </div>
+                                         ) : (
+                                             <div className="qr-placeholder">
+                                                 <p>Scan our UPI QR to pay</p>
+                                             </div>
+                                         )}
+
+                                        <div style={{ marginBottom: '20px' }}>
+                                            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '5px' }}>UPI ID (Copy & Pay):</p>
+                                            <div className="checkout__wallet-address" style={{ background: 'rgba(255,255,255,0.03)', padding: '12px' }}>
+                                                <code style={{ fontSize: '0.9rem' }}>{publicSettings.upiId || 'Not Configured'}</code>
+                                                {publicSettings.upiId && (
+                                                    <button
+                                                        className="checkout__copy-addr"
+                                                        onClick={() => {
+                                                            navigator.clipboard.writeText(publicSettings.upiId);
+                                                            alert('UPI ID Copied!');
+                                                        }}
+                                                    >
+                                                        <HiOutlineClipboardCopy />
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="card-instructions-box">
+                                            <p style={{ fontSize: '0.85rem', color: '#60a5fa', marginBottom: '8px', fontWeight: 600 }}>Card Users:</p>
+                                            <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5' }}>
+                                                {publicSettings.cardInstructions || 'For international card payments, please use a P2P service like Paxful or Noones to send USDT to our wallet address.'}
+                                            </p>
+                                        </div>
+
+                                        <button 
+                                            className="btn btn-primary btn-lg" 
+                                            style={{ width: '100%', marginTop: '30px' }}
+                                            onClick={() => setShowUpiModal(false)}
+                                        >
+                                            I Have Paid
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}

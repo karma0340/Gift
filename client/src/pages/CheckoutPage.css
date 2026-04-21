@@ -448,74 +448,115 @@
     }
 }
 
-/* Manual Verification (TXID) */
-.checkout__manual-verification {
-    margin: 20px 0;
-    text-align: left;
-}
-
-/* Onramper Modal */
-.onramper-overlay {
+/* Direct Payment Modal */
+.direct-payment-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
+    backdrop-filter: blur(10px);
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 16px;
+    animation: modal-fade-in 0.3s ease;
 }
 
-.onramper-modal {
-    background: #1a1b23;
+.direct-payment-card {
+    background: #111218;
+    background: linear-gradient(145deg, #111218 0%, #1a1b23 100%);
     width: 100%;
-    max-width: 440px;
-    height: 680px;
-    border-radius: 20px;
+    max-width: 420px;
+    max-height: 90vh;
+    border-radius: 24px;
     position: relative;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    animation: modal-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
 }
 
-.onramper-close {
+.direct-payment-card::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.direct-payment-close {
     position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
-    border: none;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     color: #fff;
-    font-size: 2rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
     cursor: pointer;
-    line-height: 1;
-    transition: opacity 0.2s;
+    transition: all 0.2s;
+    z-index: 10;
 }
 
-.onramper-close:hover {
-    opacity: 0.7;
+.direct-payment-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
 }
 
-@keyframes modal-slide-up {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+.qr-container {
+    background: #fff;
+    padding: 16px;
+    border-radius: 20px;
+    display: inline-block;
+    width: 100%;
+    margin: 20px 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-@media (max-width: 500px) {
-    .onramper-modal {
-        height: 100%;
-        max-height: 90vh;
+.qr-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.qr-placeholder {
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin: 20px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.card-instructions-box {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+@keyframes modal-fade-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 480px) {
+    .direct-payment-card {
+        padding: 24px 20px;
+        border-radius: 20px;
     }
     
-    .onramper-overlay {
-        padding: 10px;
+    .qr-image {
+        width: 160px;
+        height: 160px;
     }
 }

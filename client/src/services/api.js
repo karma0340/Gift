@@ -202,17 +202,27 @@ const api = {
     /**
      * Admin: Update Wallet Addresses
      */
-    async updateAdminWallets(token, walletAddresses, fiatSettlementCurrency) {
+    async updateAdminWallets(token, walletAddresses, fiatSettlementCurrency, upiId, upiQrImageUrl, cardInstructions) {
         const res = await fetch(`${API_BASE}/admin/settings/wallets`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ walletAddresses, fiatSettlementCurrency }),
+            body: JSON.stringify({ walletAddresses, fiatSettlementCurrency, upiId, upiQrImageUrl, cardInstructions }),
         });
         const data = await res.json();
-        if (!data.success) throw new Error(data.error || 'Failed to update wallet addresses');
+        if (!data.success) throw new Error(data.error || 'Failed to update settings');
+        return data.data;
+    },
+
+    /**
+     * Get Public Settings (UPI, Cards, etc.)
+     */
+    async getPublicSettings() {
+        const res = await fetch(`${API_BASE}/admin/settings/wallets/public`);
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error || 'Failed to fetch public settings');
         return data.data;
     }
 };

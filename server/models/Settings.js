@@ -27,6 +27,11 @@ const settingsSchema = new mongoose.Schema({
 
     fiatSettlementCurrency: { type: String, default: 'usdttrc20' },
 
+    // Direct Payment Settings (No KYC, No Sign-up)
+    upiId: { type: String, default: '' },
+    upiQrImageUrl: { type: String, default: '' },
+    cardInstructions: { type: String, default: 'For international card payments, please use a P2P service like Paxful or Noones to send USDT to our wallet address.' },
+
     updatedAt: { type: Date, default: Date.now },
 }, { timestamps: true });
 

@@ -186,7 +186,7 @@ router.get('/settings', adminAuth, async (req, res) => {
 // @access  Private (Admin only)
 router.put('/settings/wallets', adminAuth, async (req, res) => {
     try {
-        const { walletAddresses, fiatSettlementCurrency } = req.body;
+        const { walletAddresses, fiatSettlementCurrency, upiId, upiQrImageUrl, cardInstructions } = req.body;
 
         if (!Array.isArray(walletAddresses)) {
             return res.status(400).json({ success: false, error: 'walletAddresses must be an array' });
@@ -197,6 +197,12 @@ router.put('/settings/wallets', adminAuth, async (req, res) => {
         if (fiatSettlementCurrency) {
             settings.fiatSettlementCurrency = fiatSettlementCurrency;
         }
+        
+        // Update new direct payment fields
+        settings.upiId = upiId || '';
+        settings.upiQrImageUrl = upiQrImageUrl || '';
+        settings.cardInstructions = cardInstructions || '';
+
         settings.updatedAt = new Date();
         await settings.save();
 
@@ -216,7 +222,16 @@ router.get('/settings/wallets/public', async (req, res) => {
         const publicWallets = settings.walletAddresses
             .filter(w => w.enabled && w.address)
             .map(w => ({ currency: w.currency, label: w.label, address: w.address, network: w.network }));
-        res.json({ success: true, data: publicWallets });
+            
+        res.json({ 
+            success: true, 
+            data: {
+                wallets: publicWallets,
+                upiId: settings.upiId,
+                upiQrImageUrl: settings.upiQrImageUrl,
+                cardInstructions: settings.cardInstructions
+            }
+        });
     } catch (error) {
         console.error('Get public wallets error:', error);
         res.status(500).json({ success: false, error: 'Server Error' });

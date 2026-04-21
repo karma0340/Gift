@@ -29,6 +29,11 @@ const AdminDashboard = () => {
     const [walletSuccess, setWalletSuccess] = useState(false);
     const [walletError, setWalletError] = useState('');
     const [visibleAddresses, setVisibleAddresses] = useState({});
+    
+    // Direct Payment Settings
+    const [upiId, setUpiId] = useState('');
+    const [upiQrImageUrl, setUpiQrImageUrl] = useState('');
+    const [cardInstructions, setCardInstructions] = useState('');
 
     const navigate = useNavigate();
     const token = localStorage.getItem('adminToken');
@@ -76,6 +81,9 @@ const AdminDashboard = () => {
             if (settings.fiatSettlementCurrency) {
                 setFiatSettlementCurrency(settings.fiatSettlementCurrency);
             }
+            if (settings.upiId) setUpiId(settings.upiId);
+            if (settings.upiQrImageUrl) setUpiQrImageUrl(settings.upiQrImageUrl);
+            if (settings.cardInstructions) setCardInstructions(settings.cardInstructions);
         } catch (err) {
             setWalletError('Failed to load wallet settings: ' + err.message);
         } finally {
@@ -92,7 +100,7 @@ const AdminDashboard = () => {
         setWalletError('');
         setWalletSuccess(false);
         try {
-            await api.updateAdminWallets(token, wallets, fiatSettlementCurrency);
+            await api.updateAdminWallets(token, wallets, fiatSettlementCurrency, upiId, upiQrImageUrl, cardInstructions);
             setWalletSuccess(true);
             setTimeout(() => setWalletSuccess(false), 3000);
         } catch (err) {
@@ -371,6 +379,43 @@ const AdminDashboard = () => {
                                             </div>
                                         </div>
                                     ))}
+                                </div>
+
+                                <div className="direct-payment-settings" style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #333' }}>
+                                    <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <Package size={20} className="accent-color" /> Direct Payments (UPI & Cards)
+                                    </h3>
+                                    
+                                    <div className="form-group" style={{ marginBottom: '15px' }}>
+                                        <label style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Personal UPI ID (VPA)</label>
+                                        <input 
+                                            className="admin-input" 
+                                            placeholder="e.g. success@upi" 
+                                            value={upiId} 
+                                            onChange={(e) => setUpiId(e.target.value)} 
+                                        />
+                                    </div>
+                                    
+                                    <div className="form-group" style={{ marginBottom: '15px' }}>
+                                        <label style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>UPI QR Code Image URL</label>
+                                        <input 
+                                            className="admin-input" 
+                                            placeholder="https://example.com/my-qr.png" 
+                                            value={upiQrImageUrl} 
+                                            onChange={(e) => setUpiQrImageUrl(e.target.value)} 
+                                        />
+                                    </div>
+                                    
+                                    <div className="form-group" style={{ marginBottom: '15px' }}>
+                                        <label style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Card Payment Instructions</label>
+                                        <textarea 
+                                            className="admin-input" 
+                                            style={{ minHeight: '80px', padding: '12px' }}
+                                            placeholder="How should international card users pay?" 
+                                            value={cardInstructions} 
+                                            onChange={(e) => setCardInstructions(e.target.value)} 
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="settings-actions">
