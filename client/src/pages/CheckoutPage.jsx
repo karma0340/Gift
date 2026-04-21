@@ -12,6 +12,9 @@ export default function CheckoutPage() {
     const [step, setStep] = useState('email');
     const [email, setEmail] = useState('');
     const [copied, setCopied] = useState(false);
+    const [giftCode, setGiftCode] = useState('');
+    const [walletAddress, setWalletAddress] = useState('');
+    const [cryptoPayAmount, setCryptoPayAmount] = useState('');
     const [orderId, setOrderId] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
