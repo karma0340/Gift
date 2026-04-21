@@ -458,10 +458,8 @@
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
+    padding: 20px;
+    overflow-y: auto; /* Allows the entire background screen to scroll */
     animation: modal-fade-in 0.3s ease;
 }
 
@@ -470,18 +468,12 @@
     background: linear-gradient(145deg, #111218 0%, #1a1b23 100%);
     width: 100%;
     max-width: 420px;
-    max-height: 90vh;
+    margin: 40px auto; /* Centers relative to page, adds breathing room */
     border-radius: 24px;
     position: relative;
     padding: 32px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-    overflow-y: auto;
-    scrollbar-width: none; /* Firefox */
-}
-
-.direct-payment-card::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
 }
 
 .direct-payment-close {
