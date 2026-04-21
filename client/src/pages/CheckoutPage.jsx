@@ -322,35 +322,26 @@ export default function CheckoutPage() {
                                 I've Sent the Payment
                             </button>
 
-                            <div className="checkout__onramper-section" style={{ textAlign: 'center', marginTop: '10px' }}>
-                                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-                                    Need crypto? Use UPI, Cards, or Google Pay instantly
+                                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
+                                    Need crypto? Buy with Credit/Debit card
                                 </p>
-                                {import.meta.env.VITE_ONRAMPER_API_KEY ? (
-                                    <a
-                                        href={`https://buy.onramper.com/?themeName=dark&apiKey=${import.meta.env.VITE_ONRAMPER_API_KEY}&defaultFiat=inr&defaultCrypto=usdt&walletAddress=${walletAddress}&fiatAmount=${amount}`}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="btn btn-secondary"
-                                        style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                                    >
-                                        🏦 Pay via Cards / UPI
-                                    </a>
-                                ) : (
-                                    <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '10px', borderRadius: '8px', border: '1px border rgba(239, 68, 68, 0.3)' }}>
-                                        <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: 0 }}>
-                                            <strong>Admin Setup Required:</strong> To enable Card/UPI payments, you must add your free Onramper API Key to your Vercel Environment Variables as <code style={{color: '#fff'}}>VITE_ONRAMPER_API_KEY</code>.
-                                        </p>
-                                    </div>
-                                )}
-
+                                <a
+                                    href={`https://buy.moonpay.com?currencyCode=usdt_trx&walletAddress=${walletAddress}&baseCurrencyAmount=${amount}&baseCurrencyCode=usd`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="btn btn-secondary"
+                                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                                >
+                                    💳 Pay via MoonPay
+                                </a>
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
-                                    Onramper supports <strong>INR (UPI)</strong>, USD, and more. No stressful ID verification for small amounts via Mercuryo/Transak.
+                                    MoonPay is the only provider that allows you to accept cards without creating a developer account. However, they may require your customers to verify their identity (KYC).
                                 </p>
                             </div>
                         </div>
                     </div>
                 )}
+
 
                 {/* ── STEP 3: Processing / Verifying ── */}
                 {step === 'processing' && (
