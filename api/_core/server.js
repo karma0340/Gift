@@ -34,11 +34,13 @@ const globalLimiter = rateLimit({
 app.use('/api', globalLimiter);
 
 // 4. Secure CORS configuration
+const allowedOrigins = process.env.FRONTEND_URL
+    ? [process.env.FRONTEND_URL]
+    : true; // Allow all if not explicitly set (safe for same-domain Vercel deployments)
+
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' 
-        ? [process.env.FRONTEND_URL] 
-        : true, // Allow all in dev for easier testing
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
     optionsSuccessStatus: 200
 };
