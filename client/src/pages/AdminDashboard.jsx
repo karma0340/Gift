@@ -308,30 +308,7 @@ const AdminDashboard = () => {
                             <>
                                 {walletError && <div className="admin-error-message">{walletError}</div>}
 
-                                <div className="fiat-settlement-card">
-                                    <div className="settlement-card-header">
-                                        <span className="settlement-card-icon">💳</span>
-                                        <h3 className="settlement-card-title">Cards & UPI Settlement Wallet</h3>
-                                        <span className="moonpay-badge" style={{ background: 'var(--accent-blue)' }}>Onramper</span>
-                                    </div>
-                                    <p className="settlement-card-description">
-                                        When customers pay with a credit card or <strong>UPI (INR)</strong> via Onramper, the crypto is automatically sent to <strong>this</strong> wallet address.
-                                    </p>
-                                    <select
-                                        className="settlement-card-select"
-                                        value={fiatSettlementCurrency}
-                                        onChange={e => setFiatSettlementCurrency(e.target.value)}
-                                    >
-                                        {wallets.filter(w => w.enabled && w.address).map(w => (
-                                            <option key={w.currency} value={w.currency} style={{ background: '#1a1a1a' }}>
-                                                {w.label} ({w.network}) — {w.address.slice(0, 8)}...{w.address.slice(-6)}
-                                            </option>
-                                        ))}
-                                        {wallets.filter(w => w.enabled && w.address).length === 0 && (
-                                            <option disabled>⚠️ Enable and set at least one wallet address below first</option>
-                                        )}
-                                    </select>
-                                </div>
+
 
                                 <div className="wallets-grid">
                                     {wallets.map((wallet, index) => (
