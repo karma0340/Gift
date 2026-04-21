@@ -35,7 +35,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         if (!token) {
-            navigate('/admin/login');
+            navigate('/secure-admin-portal/login');
             return;
         }
         fetchData();
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
         } catch (err) {
             if (err.message.includes('token') || err.message.includes('401')) {
                 localStorage.removeItem('adminToken');
-                navigate('/admin/login');
+                navigate('/secure-admin-portal/login');
             } else {
                 setError('Failed to fetch dashboard data. ' + err.message);
             }
@@ -108,7 +108,7 @@ const AdminDashboard = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('adminToken');
-        navigate('/admin/login');
+        navigate('/secure-admin-portal/login');
     };
 
     const openFulfillModal = (order) => {

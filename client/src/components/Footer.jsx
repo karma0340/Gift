@@ -55,7 +55,11 @@ export default function Footer() {
                         © {new Date().getFullYear()} GlobalGift. All rights reserved.
                     </p>
                     <p className="footer__disclaimer">
-                        Gift cards are fulfilled by third-party providers. Crypto payments processed securely.
+                        GlobalGift is a demonstration platform for educational and commercial showcase purposes. 
+                        All virtual goods and gift cards are fulfilled via secure third-party processors.
+                    </p>
+                    <p className="footer__disclaimer" style={{ marginTop: '5px', opacity: 0.6 }}>
+                        This platform is not affiliated with any of the brands listed. All trademarks belong to their respective owners.
                     </p>
                 </div>
             </div>

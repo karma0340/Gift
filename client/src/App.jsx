@@ -19,12 +19,12 @@ function App() {
         <Route path="/" element={<><Navbar /><HomePage /><Footer /></>} />
         <Route path="/catalog" element={<><Navbar /><CatalogPage /><Footer /></>} />
         <Route path="/card/:id" element={<><Navbar /><CardDetailPage /><Footer /></>} />
-        <Route path="/checkout" element={<><Navbar /><CheckoutPage /><Footer /></>} />
+        <Route path="/finalize-fulfillment" element={<><Navbar /><CheckoutPage /><Footer /></>} />
         <Route path="/orders" element={<><Navbar /><OrdersPage /><Footer /></>} />
         
         {/* Admin Routes without Navbar/Footer */}
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/secure-admin-portal/login" element={<AdminLoginPage />} />
+        <Route path="/secure-admin-portal" element={<AdminDashboard />} />
 
         {/* Legal Routes */}
         <Route path="/privacy" element={<><Navbar /><PrivacyPolicy /><Footer /></>} />

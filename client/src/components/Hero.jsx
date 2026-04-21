@@ -28,8 +28,7 @@ export default function Hero() {
                 </h1>
 
                 <p className="hero__subtitle animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                    Convert your cryptocurrency into gift cards for Amazon, Apple, Netflix,
-                    Steam and 500+ brands worldwide. No KYC required.
+                    Convert your cryptocurrency into gift cards for your favorite sites worldwide. No KYC required.
                 </p>
 
                 <div className="hero__actions animate-fade-in-up" style={{ animationDelay: '0.3s' }}>

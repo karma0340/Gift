@@ -40,7 +40,7 @@ export default function Navbar() {
                     <Link to="/orders" className={`navbar__link ${location.pathname === '/orders' ? 'active' : ''}`}>My Orders</Link>
                     {/* Admin link — only visible when logged in as admin */}
                     {isAdmin && (
-                        <Link to="/admin" className={`navbar__link ${location.pathname.startsWith('/admin') ? 'active' : ''}`}>Admin</Link>
+                        <Link to="/secure-admin-portal" className={`navbar__link ${location.pathname.startsWith('/secure-admin-portal') ? 'active' : ''}`}>Admin</Link>
                     )}
                     <Link to="/catalog" className="btn btn-primary btn-sm navbar__cta">Buy Gift Cards</Link>
                 </div>

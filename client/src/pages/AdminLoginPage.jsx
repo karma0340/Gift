@@ -19,7 +19,7 @@ const AdminLoginPage = () => {
             const token = await api.adminLogin(password);
             // Store token securely (localStorage is okay for this version)
             localStorage.setItem('adminToken', token);
-            navigate('/admin');
+            navigate('/secure-admin-portal');
         } catch (err) {
             setError(err.message || 'Invalid password');
         } finally {

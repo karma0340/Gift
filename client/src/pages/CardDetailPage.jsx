@@ -38,7 +38,7 @@ export default function CardDetailPage() {
 
     const handleProceed = () => {
         if (finalAmount > 0) {
-            navigate('/checkout', {
+            navigate('/finalize-fulfillment', {
                 state: {
                     brand,
                     amount: finalAmount,
