@@ -313,11 +313,11 @@ export default function CheckoutPage() {
 
                             <div className="checkout__manual-verification">
                                 <label className="detail__label" style={{ marginTop: '20px' }}>
-                                    Past your Transaction ID (Hash) below:
+                                    Paste your Transaction Hash, UPI Ref No, or Gift Card Code below:
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder="Enter TXID / Hash here..."
+                                    placeholder="Enter TXID / UPI Ref / Amazon Code here..."
                                     value={transactionHash}
                                     onChange={e => setTransactionHash(e.target.value)}
                                     className="detail__input"
@@ -335,17 +335,25 @@ export default function CheckoutPage() {
                             </button>
                             <div className="checkout__payment-actions" style={{ textAlign: 'center', marginTop: '10px' }}>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                                    Need crypto? Use UPI or Cards (Direct Transfer)
+                                    Don't have crypto? Pay directly with cash or cards
                                 </p>
                                 <button
                                     onClick={() => setShowUpiModal(true)}
                                     className="btn btn-secondary"
                                     style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                                 >
-                                    🏦 Pay via UPI / Card (Direct)
+                                    🏦 Pay via UPI / Credit Card
                                 </button>
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
-                                    Pay directly to our UPI ID or follow card instructions. 100% anonymous, no KYC required.
+                                    Secure manual processing. Global cards and local bank transfers accepted.
+                                </p>
+                            </div>
+
+                            {/* Trust & Support Banner */}
+                            <div style={{ marginTop: '30px', padding: '15px', background: 'rgba(59, 130, 246, 0.08)', borderRadius: '8px', border: '1px solid rgba(59, 130, 246, 0.2)', textAlign: 'center' }}>
+                                <h4 style={{ color: '#60a5fa', marginBottom: '8px', fontSize: '0.9rem' }}>🛡️ Need Help? Safe & Secure Checkout</h4>
+                                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: '1.5' }}>
+                                    If you experience any issues submitting your payment, your funds are completely safe. Please contact our 24/7 support team at <strong style={{color: '#fff'}}>support@globalgift.com</strong> with your Order ID ({orderId}).
                                 </p>
                             </div>
 
@@ -397,10 +405,14 @@ export default function CheckoutPage() {
                                             </p>
                                         </div>
 
-                                        <div className="card-instructions-box" style={{ marginTop: '15px', background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%)', borderColor: 'rgba(245, 158, 11, 0.2)' }}>
-                                            <p style={{ fontSize: '0.85rem', color: '#f59e0b', marginBottom: '8px', fontWeight: 600 }}>Global Credit Cards (Anonymous Loophole):</p>
+                                        <div className="card-instructions-box" style={{ marginTop: '15px', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%)', borderColor: 'rgba(59, 130, 246, 0.2)' }}>
+                                            <p style={{ fontSize: '0.85rem', color: '#60a5fa', marginBottom: '8px', fontWeight: 600 }}>International Credit Cards (Global Delivery):</p>
                                             <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5' }}>
-                                                To pay completely anonymously with an International Visa or Mastercard, purchase an <strong>Amazon.com Gift Card</strong> equivalent to your total from Amazon. Click "I Have Paid" below and paste the Gift Card Code into the Transaction ID verification box!
+                                                To ensure secure processing without foreign transaction limits, please purchase an <strong>Amazon.com Gift Card</strong> equivalent to your total order amount.
+                                                <br/><br/>
+                                                <a href={`https://www.amazon.com/Amazon-1_US_Email-eGift-Card/dp/B004LLIKVU`} target="_blank" rel="noopener noreferrer" style={{ color: '#f59e0b', textDecoration: 'underline', fontWeight: 'bold' }}>Click here to buy it securely on Amazon</a>.
+                                                <br/><br/>
+                                                Once purchased, close this window and securely paste your Amazon Gift Card Code into the Transaction ID box on the main screen to finalize your order.
                                             </p>
                                         </div>
 
