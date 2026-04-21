@@ -393,7 +393,7 @@ export default function CheckoutPage() {
                                         <div className="card-instructions-box">
                                             <p style={{ fontSize: '0.85rem', color: '#60a5fa', marginBottom: '8px', fontWeight: 600 }}>Card Payments (via PhonePe/GPay):</p>
                                             <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.5' }}>
-                                                {publicSettings.cardInstructions || 'You can use your Credit Card to pay! Simply link your RuPay or supported Credit Card in your PhonePe, Paytm, or Google Pay app, and scan the UPI QR code above to send the payment directly.'}
+                                                You can use your Credit Card to pay! Simply link your RuPay or supported Credit Card in your PhonePe, Paytm, or Google Pay app, and scan the UPI QR code above to send the payment directly.
                                             </p>
                                         </div>
 

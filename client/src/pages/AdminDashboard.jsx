@@ -383,16 +383,6 @@ const AdminDashboard = () => {
                                         />
                                     </div>
                                     
-                                    <div className="form-group" style={{ marginBottom: '15px' }}>
-                                        <label style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Card Payment Instructions</label>
-                                        <textarea 
-                                            className="admin-input" 
-                                            style={{ minHeight: '80px', padding: '12px' }}
-                                            placeholder="How should international card users pay?" 
-                                            value={cardInstructions} 
-                                            onChange={(e) => setCardInstructions(e.target.value)} 
-                                        />
-                                    </div>
                                 </div>
 
                                 <div className="settings-actions">
