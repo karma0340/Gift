@@ -326,15 +326,23 @@ export default function CheckoutPage() {
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
                                     Need crypto? Use UPI, Cards, or Google Pay instantly
                                 </p>
-                                <a
-                                    href={`https://buy.onramper.com/?themeName=dark&apiKey=pk_prod_01HB9ZXY6HBNVJ1D59ZXY6HBNV&defaultFiat=inr&defaultCrypto=usdt&walletAddress=${walletAddress}&fiatAmount=${amount}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="btn btn-secondary"
-                                    style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                                >
-                                    🏦 Pay via Cards / UPI
-                                </a>
+                                {import.meta.env.VITE_ONRAMPER_API_KEY ? (
+                                    <a
+                                        href={`https://buy.onramper.com/?themeName=dark&apiKey=${import.meta.env.VITE_ONRAMPER_API_KEY}&defaultFiat=inr&defaultCrypto=usdt&walletAddress=${walletAddress}&fiatAmount=${amount}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="btn btn-secondary"
+                                        style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                                    >
+                                        🏦 Pay via Cards / UPI
+                                    </a>
+                                ) : (
+                                    <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '10px', borderRadius: '8px', border: '1px border rgba(239, 68, 68, 0.3)' }}>
+                                        <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: 0 }}>
+                                            <strong>Admin Setup Required:</strong> To enable Card/UPI payments, you must add your free Onramper API Key to your Vercel Environment Variables as <code style={{color: '#fff'}}>VITE_ONRAMPER_API_KEY</code>.
+                                        </p>
+                                    </div>
+                                )}
 
                                 <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '8px', lineHeight: '1.4' }}>
                                     Onramper supports <strong>INR (UPI)</strong>, USD, and more. No stressful ID verification for small amounts via Mercuryo/Transak.
