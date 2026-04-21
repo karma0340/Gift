@@ -468,10 +468,10 @@
     background: linear-gradient(145deg, #111218 0%, #1a1b23 100%);
     width: 100%;
     max-width: 420px;
-    margin: 40px auto; /* Centers relative to page, adds breathing room */
+    margin: 20px auto; /* Centers relative to page, adds breathing room */
     border-radius: 24px;
     position: relative;
-    padding: 32px;
+    padding: 24px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
 }
@@ -502,19 +502,19 @@
 
 .qr-container {
     background: #fff;
-    padding: 16px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: fit-content;
-    margin: 20px auto;
+    margin: 15px auto;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .qr-image {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
 }
 
@@ -531,9 +531,9 @@
 .card-instructions-box {
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
     border: 1px solid rgba(59, 130, 246, 0.2);
-    padding: 20px;
-    border-radius: 16px;
-    margin-top: 20px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-top: 15px;
     text-align: left;
 }
 
@@ -543,13 +543,22 @@
 }
 
 @media (max-width: 480px) {
+    .direct-payment-overlay {
+        padding: 10px;
+    }
+
     .direct-payment-card {
-        padding: 24px 20px;
+        padding: 20px 15px;
         border-radius: 20px;
+        margin: 15px auto;
     }
     
     .qr-image {
-        width: 160px;
-        height: 160px;
+        width: 120px;
+        height: 120px;
+    }
+
+    .card-instructions-box {
+        padding: 10px 12px;
     }
 }
