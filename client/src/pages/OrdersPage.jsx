@@ -31,7 +31,15 @@ export default function OrdersPage() {
     const fetchOrders = async () => {
         setLoading(true);
         try {
-            const data = await api.getOrders();
+            const storedEmail = localStorage.getItem('user_email');
+            
+            if (!storedEmail) {
+                setOrders([]);
+                setLoading(false);
+                return;
+            }
+
+            const data = await api.getOrders(storedEmail);
             setOrders(data.orders || []);
         } catch (err) {
             console.warn('Failed to fetch orders from backend, using empty list');
@@ -191,8 +199,12 @@ export default function OrdersPage() {
                     </div>
                 ) : (
                     <div className="orders__empty glass-card">
-                        <h3>No orders yet</h3>
-                        <p>Start shopping by browsing our gift card catalog</p>
+                        <h3>{localStorage.getItem('user_email') ? 'No orders yet' : 'No history found on this device'}</h3>
+                        <p>
+                            {localStorage.getItem('user_email') 
+                                ? 'Start shopping by browsing our gift card catalog'
+                                : 'To view your order history, please first complete a purchase on this device.'}
+                        </p>
                         <Link to="/catalog" className="btn btn-primary" style={{ marginTop: '16px' }}>
                             Browse Gift Cards
                         </Link>

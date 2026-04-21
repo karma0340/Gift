@@ -126,27 +126,29 @@ export default function CatalogPage() {
                                 </span>
                             </div>
 
-                            <h3 className="catalog-card__name">{brand.name}</h3>
+                            <div className="catalog-card__content">
+                                <h3 className="catalog-card__name">{brand.name}</h3>
 
-                            <p className="catalog-card__category-tag">
-                                {brand.category}
-                            </p>
+                                <p className="catalog-card__category-tag">
+                                    {brand.category}
+                                </p>
 
-                            <p className="catalog-card__desc">{brand.description}</p>
+                                <p className="catalog-card__desc">{brand.description}</p>
 
-                            <div className="catalog-card__amounts">
-                                {brand.denominations.slice(0, 4).map(d => (
-                                    <span key={d} className="catalog-card__amount">
-                                        {brand.currency === 'INR' ? '₹' : '$'}{d}
-                                    </span>
-                                ))}
-                                {brand.denominations.length > 4 && (
-                                    <span className="catalog-card__amount">+{brand.denominations.length - 4}</span>
-                                )}
-                            </div>
+                                <div className="catalog-card__amounts">
+                                    {brand.denominations.slice(0, 4).map(d => (
+                                        <span key={d} className="catalog-card__amount">
+                                            {brand.currency === 'INR' ? '₹' : '$'}{d}
+                                        </span>
+                                    ))}
+                                    {brand.denominations.length > 4 && (
+                                        <span className="catalog-card__amount">+{brand.denominations.length - 4}</span>
+                                    )}
+                                </div>
 
-                            <div className="catalog-card__footer">
-                                <span className="catalog-card__buy-btn">Buy Now →</span>
+                                <div className="catalog-card__footer">
+                                    <span className="catalog-card__buy-btn">Buy Now →</span>
+                                </div>
                             </div>
                         </Link>
                     ))}

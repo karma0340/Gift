@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -29,6 +29,11 @@ function App() {
         {/* Legal Routes */}
         <Route path="/privacy" element={<><Navbar /><PrivacyPolicy /><Footer /></>} />
         <Route path="/terms" element={<><Navbar /><TermsOfService /><Footer /></>} />
+
+        {/* Redirects for old routes (Stealth) */}
+        <Route path="/admin" element={<Navigate to="/" replace />} />
+        <Route path="/admin/*" element={<Navigate to="/" replace />} />
+        <Route path="/checkout" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

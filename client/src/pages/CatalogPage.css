@@ -111,41 +111,40 @@
 /* Grid */
 .catalog__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
 }
 
 /* Card */
 .catalog-card {
     display: flex;
     flex-direction: column;
-    padding: 22px;
+    padding: 24px;
     position: relative;
     cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.catalog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .catalog-card__discount {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 16px;
+    right: 16px;
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 4px 10px;
+    padding: 6px 12px;
     border-radius: 100px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     background: var(--accent-green-dim);
     color: var(--accent-green);
-}
-
-.featured__card-logo {
-    width: 72px;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .catalog-card__logo {
@@ -154,34 +153,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     flex-shrink: 0;
 }
 
-.catalog-card__initial {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 700;
+.catalog-card__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0; /* Prevents overflow */
 }
 
 .catalog-card__name {
     font-family: var(--font-heading);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     margin-bottom: 4px;
+    color: var(--text-primary);
 }
 
 .catalog-card__category-tag {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    font-weight: 500;
 }
 
 .catalog-card__desc {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
     flex: 1;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -193,57 +195,65 @@
 .catalog-card__amounts {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 14px;
+    gap: 6px;
+    margin-bottom: 20px;
 }
 
 .catalog-card__amount {
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background: var(--bg-glass-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
 .catalog-card__footer {
     border-top: 1px solid var(--border-color);
-    padding-top: 12px;
+    padding-top: 16px;
+    margin-top: auto;
 }
 
 .catalog-card__buy-btn {
-    font-weight: 600;
-    font-size: 0.88rem;
+    font-weight: 700;
+    font-size: 0.9rem;
     color: var(--accent-green);
     transition: all var(--transition-fast);
-}
-
-.catalog-card:hover .catalog-card__buy-btn {
-    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 /* Empty */
 .catalog__empty {
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 20px;
     color: var(--text-muted);
-    font-size: 1.05rem;
 }
 
 /* ===== TABLET ===== */
-@media (max-width: 900px) {
+@media (max-width: 992px) {
     .catalog__grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog__grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    
+    .catalog-card {
+        padding: 20px;
     }
 }
 
 /* ===== MOBILE ===== */
-@media (max-width: 600px) {
+@media (max-width: 540px) {
     .catalog-page {
-        padding-top: calc(var(--nav-height) + 20px);
-        padding-bottom: 60px;
+        padding-top: calc(var(--nav-height) + 24px);
     }
 
     .catalog__categories {
@@ -251,8 +261,9 @@
         overflow-x: auto;
         flex-wrap: nowrap;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 4px;
+        gap: 10px;
+        padding: 0 16px 8px;
+        margin: 0 -16px 16px;
     }
 
     .catalog__categories::-webkit-scrollbar {
@@ -261,38 +272,67 @@
 
     .catalog__grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 16px;
     }
 
     .catalog-card {
         flex-direction: row;
         align-items: flex-start;
-        gap: 14px;
         padding: 16px;
+        gap: 16px;
     }
 
     .catalog-card__logo {
         margin-bottom: 0;
-        width: 48px;
-        height: 48px;
+        width: 56px;
+        height: 56px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: var(--radius-md);
     }
 
-    .catalog-card__initial {
-        font-size: 1.2rem;
+    .catalog-card__content {
+        padding-top: 2px;
+    }
+
+    .catalog-card__name {
+        font-size: 1.1rem;
+        padding-right: 70px; /* Space for discount badge */
     }
 
     .catalog-card__discount {
-        top: 10px;
-        right: 10px;
+        top: 16px;
+        right: 16px;
+        padding: 3px 8px;
+        font-size: 0.7rem;
     }
 
     .catalog-card__desc {
-        -webkit-line-clamp: 1;
-        line-clamp: 1;
-        margin-bottom: 8px;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
     }
 
     .catalog-card__amounts {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+    }
+
+    .catalog-card__footer {
+        padding-top: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .catalog-card {
+        gap: 12px;
+    }
+    
+    .catalog-card__logo {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .catalog-card__name {
+        font-size: 1rem;
     }
 }

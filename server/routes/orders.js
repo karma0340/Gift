@@ -14,7 +14,24 @@ router.get('/', async (req, res, next) => {
         const { email, status, page = 1, limit = 20 } = req.query;
 
         const query = {};
-        if (email) query.email = email.toLowerCase();
+        if (email) {
+            query.email = email.toLowerCase();
+        } else {
+            // SECURITY: If no email is provided, do not return all orders.
+            // Only admin routes (in admin.js) should be allowed to see all orders.
+            return res.json({
+                success: true,
+                data: {
+                    orders: [],
+                    pagination: {
+                        page: parseInt(page),
+                        limit: parseInt(limit),
+                        total: 0,
+                        pages: 0,
+                    },
+                },
+            });
+        }
         if (status) query.status = status;
 
         const orders = await Order.find(query)

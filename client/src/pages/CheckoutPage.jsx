@@ -55,6 +55,10 @@ export default function CheckoutPage() {
             setOrderId(orderData.orderId);
             setWalletAddress(orderData.payment.address);
             setCryptoPayAmount(orderData.payment.amount);
+
+            // Store email in localStorage to remember who is currently on this device
+            localStorage.setItem('user_email', email);
+
             if (orderData.fiatSettlement) {
                 setFiatSettlement({
                     moonpayCode: orderData.fiatSettlement.moonpayCode,
@@ -131,8 +135,37 @@ export default function CheckoutPage() {
                             <div className="checkout__order-summary">
                                 <div className="checkout__brand-row">
                                     <div className="checkout__brand-logo" style={{ background: brand.bgGradient, position: 'relative', overflow: 'hidden' }}>
-                                        {brand.logo && <img src={brand.logo} alt={brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 1 }} onError={e => e.target.style.display = 'none'} />}
-                                        <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>
+                                        {brand.logo && (
+                                            <img 
+                                                src={brand.logo} 
+                                                alt={brand.name} 
+                                                style={{ 
+                                                    width: '100%', 
+                                                    height: '100%', 
+                                                    objectFit: 'contain', 
+                                                    position: 'absolute', 
+                                                    inset: 0, 
+                                                    zIndex: 2,
+                                                    padding: '8px',
+                                                    opacity: 0,
+                                                    transition: 'opacity 0.2s'
+                                                }} 
+                                                onLoad={(e) => {
+                                                    e.target.style.opacity = '1';
+                                                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'none';
+                                                }}
+                                                onError={e => {
+                                                    e.target.style.display = 'none';
+                                                }} 
+                                            />
+                                        )}
+                                        <span style={{ 
+                                            fontFamily: 'var(--font-heading)', 
+                                            fontSize: '1.2rem', 
+                                            fontWeight: 700, 
+                                            color: '#fff',
+                                            zIndex: 1 
+                                        }}>
                                             {brand.name.charAt(0)}
                                         </span>
                                     </div>
@@ -186,8 +219,37 @@ export default function CheckoutPage() {
                             <div className="checkout__order-summary">
                                 <div className="checkout__brand-row">
                                     <div className="checkout__brand-logo" style={{ background: brand.bgGradient, position: 'relative', overflow: 'hidden' }}>
-                                        {brand.logo && <img src={brand.logo} alt={brand.name} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 1 }} onError={e => e.target.style.display = 'none'} />}
-                                        <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>
+                                        {brand.logo && (
+                                            <img 
+                                                src={brand.logo} 
+                                                alt={brand.name} 
+                                                style={{ 
+                                                    width: '100%', 
+                                                    height: '100%', 
+                                                    objectFit: 'contain', 
+                                                    position: 'absolute', 
+                                                    inset: 0, 
+                                                    zIndex: 2,
+                                                    padding: '8px',
+                                                    opacity: 0,
+                                                    transition: 'opacity 0.2s'
+                                                }} 
+                                                onLoad={(e) => {
+                                                    e.target.style.opacity = '1';
+                                                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'none';
+                                                }}
+                                                onError={e => {
+                                                    e.target.style.display = 'none';
+                                                }} 
+                                            />
+                                        )}
+                                        <span style={{ 
+                                            fontFamily: 'var(--font-heading)', 
+                                            fontSize: '1.2rem', 
+                                            fontWeight: 700, 
+                                            color: '#fff',
+                                            zIndex: 1 
+                                        }}>
                                             {brand.name.charAt(0)}
                                         </span>
                                     </div>
