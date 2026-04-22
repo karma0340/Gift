@@ -433,6 +433,10 @@
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 151px;
 }
 
 /* Toggle Switch */
@@ -442,6 +446,7 @@
     width: 44px;
     height: 24px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .toggle-switch input {
