@@ -13,6 +13,7 @@
     position: sticky;
     top: 0;
     z-index: 10;
+    transition: padding 0.3s;
 }
 
 .admin-header-left {
@@ -317,6 +318,13 @@
     background: var(--surface-color);
     border-bottom: 1px solid var(--border-color);
     max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.admin-tabs::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .admin-tab {
@@ -375,7 +383,7 @@
 
 .wallets-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.25rem;
     padding: 1.5rem;
 }
@@ -767,20 +775,38 @@
 
 @media (max-width: 480px) {
     .admin-header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-        text-align: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .admin-header-left h1 {
+        font-size: 1.1rem;
     }
 
     .admin-header-right {
-        width: 100%;
-        justify-content: center;
+        gap: 0.5rem;
     }
 
     .logout-btn {
-        flex: 1;
-        justify-content: center;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .admin-tabs {
+        padding: 0.5rem 1rem 0;
+    }
+
+    .admin-tab {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .section-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.8rem;
     }
 
     .stats-grid {
@@ -793,5 +819,37 @@
 
     .stat-value {
         font-size: 1.5rem;
+    }
+
+    .wallets-grid {
+        padding: 1rem;
+    }
+
+    .wallet-card {
+        padding: 1rem;
+    }
+    
+    .address-preview {
+        word-break: break-all;
+        max-width: 100%;
+        display: block;
+    }
+}
+
+@media (max-width: 320px) {
+    .admin-header {
+        padding: 0.5rem;
+    }
+    
+    .admin-header-left h1 {
+        font-size: 1rem;
+    }
+    
+    .admin-tab {
+        padding: 0.5rem;
+    }
+
+    .wallet-card {
+        padding: 0.75rem;
     }
 }
