@@ -244,12 +244,15 @@ const AdminDashboard = () => {
                                         ) : (
                                             orders.map(order => (
                                                 <tr key={order._id}>
-                                                    <td className="mono">{order.orderId}</td>
-                                                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                                                    <td>{order.email}</td>
-                                                    <td>{order.brand?.name || 'Unknown'} <strong>${order.amount}</strong></td>
-                                                    <td className="mono">{order.crypto?.amount} {order.crypto?.currency?.toUpperCase()}</td>
-                                                    <td className="mono" style={{ maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                    <td data-label="Order ID" className="mono">{order.orderId}</td>
+                                                    <td data-label="Date" className="date-cell">
+                                                        <span>{new Date(order.createdAt).toLocaleDateString()}</span>
+                                                        <small>{new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+                                                    </td>
+                                                    <td data-label="Customer">{order.email}</td>
+                                                    <td data-label="Gift Card">{order.brand?.name || 'Unknown'} <strong>${order.amount}</strong></td>
+                                                    <td data-label="Crypto Paid" className="mono">{order.crypto?.amount} {order.crypto?.currency?.toUpperCase()}</td>
+                                                    <td data-label="TX/Ref" className="mono" style={{ maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                                         {order.crypto?.transactionHash ? (
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                                                 <span title={order.crypto?.transactionHash}>
@@ -271,12 +274,12 @@ const AdminDashboard = () => {
                                                             <span className="text-muted" style={{ fontSize: '0.75rem' }}>No Ref</span>
                                                         )}
                                                     </td>
-                                                    <td>
+                                                    <td data-label="Status">
                                                         <span className={`status-badge status-${order.status}`}>
                                                             {order.status.replace('_', ' ')}
                                                         </span>
                                                     </td>
-                                                    <td>
+                                                    <td data-label="Action">
                                                         {order.status !== 'completed' && order.status !== 'failed' ? (
                                                             <button className="btn btn-primary sm" onClick={() => openFulfillModal(order)}>
                                                                 Fulfill Now
