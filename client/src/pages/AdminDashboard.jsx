@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, DollarSign, Package, CheckCircle, RefreshCcw, Settings, Wallet, Save, Eye, EyeOff, Check } from 'lucide-react';
+import { LogOut, DollarSign, Package, CheckCircle, RefreshCcw, Settings, Wallet, Save, Eye, EyeOff, Check, Copy } from 'lucide-react';
 import api from '../services/api';
 import './AdminDashboard.css';
 
@@ -247,19 +247,19 @@ const AdminDashboard = () => {
                                                     <td className="mono">{order.orderId}</td>
                                                     <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                                                     <td>{order.email}</td>
-                                                    <td>{order.brand.name} <strong>${order.amount}</strong></td>
-                                                    <td className="mono">{order.crypto.amount} {order.crypto.currency.toUpperCase()}</td>
+                                                    <td>{order.brand?.name || 'Unknown'} <strong>${order.amount}</strong></td>
+                                                    <td className="mono">{order.crypto?.amount} {order.crypto?.currency?.toUpperCase()}</td>
                                                     <td className="mono" style={{ maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                                         {order.crypto?.transactionHash ? (
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                                                <span title={order.crypto.transactionHash}>
-                                                                    {order.crypto.transactionHash.length > 20 ? `${order.crypto.transactionHash.substring(0, 10)}...` : order.crypto.transactionHash}
+                                                                <span title={order.crypto?.transactionHash}>
+                                                                    {order.crypto?.transactionHash?.length > 20 ? `${order.crypto.transactionHash.substring(0, 10)}...` : order.crypto?.transactionHash}
                                                                 </span>
                                                                 <button 
                                                                     className="btn-icon" 
                                                                     style={{ padding: '2px', background: 'none', border: 'none', color: 'var(--accent-blue)', cursor: 'pointer' }}
                                                                     onClick={() => {
-                                                                        navigator.clipboard.writeText(order.crypto.transactionHash);
+                                                                        navigator.clipboard.writeText(order.crypto?.transactionHash || '');
                                                                         alert('Copied to clipboard!');
                                                                     }}
                                                                     title="Copy to Clipboard"
